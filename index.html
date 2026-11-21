@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FFFFFF">
-
     <title>A Little Invitation</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +71,6 @@
                 opacity: 0;
                 transform: translateY(14px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -389,10 +387,6 @@
 
             <h1>Hey, do you want to hang out with me?</h1>
 
-            <p class="subtitle">
-                Nothing complicated. Just a little time together.
-            </p>
-
             <div class="button-group">
 
                 <button class="btn btn-primary" onclick="showScreen('yesForm')">
@@ -509,16 +503,12 @@
 
 <script>
 
-    // ==========================================
-    // FORMSPREE EMAIL CONFIGURATION
-    // ==========================================
+    // FORMSPREE CONFIGURATION
 
     const FORMSPREE_URL = "https://formspree.io/f/myewngrw";
 
 
-    // ==========================================
     // SCREEN NAVIGATION
-    // ==========================================
 
     function showScreen(screenId) {
 
@@ -531,9 +521,7 @@
     }
 
 
-    // ==========================================
     // DATE AND TIME VALIDATION
-    // ==========================================
 
     const dateInput = document.getElementById('datetime');
 
@@ -552,9 +540,7 @@
     dateInput.min = getLocalDateTime();
 
 
-    // ==========================================
     // EMAIL NOTIFICATION
-    // ==========================================
 
     const form = document.getElementById('invitationForm');
 
@@ -633,3 +619,5 @@
 
 </body>
 </html>
+
+
