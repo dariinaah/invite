@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <title>A Little Invitation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --blue: #2457D6;
+            --blue-dark: #1943A8;
+            --navy: #14213D;
+            --grey: #7B8495;
+            --light: #F5F7FB;
+            --border: #E5EAF2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: var(--navy);
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow: hidden;
+        }
+
+        button, input {
+            font-family: inherit;
+        }
+
+        .container {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            position: relative;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 390px;
+            text-align: center;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.55s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ENVELOPE */
+
+        .envelope {
+            width: 220px;
+            height: 155px;
+            margin: 0 auto 42px;
+            position: relative;
+            background: #F5F7FB;
+            border: 1px solid #DCE4F2;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(20,33,61,0.06);
+        }
+
+        .envelope::before,
+        .envelope::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .envelope::before {
+            left: 0;
+            border-width: 76px 110px 0;
+            border-color: #E9EEF8 transparent transparent;
+        }
+
+        .envelope::after {
+            right: 0;
+            border-width: 76px 110px 0;
+            border-color: #F0F3F9 transparent transparent;
+        }
+
+        .ribbon {
+            position: relative;
+            z-index: 2;
+            width: 35px;
+            height: 35px;
+            background: var(--blue);
+            transform: rotate(45deg);
+            border-radius: 3px;
+        }
+
+        .ribbon::before,
+        .ribbon::after {
+            content: "";
+            position: absolute;
+            background: var(--blue);
+            width: 24px;
+            height: 24px;
+            border-radius: 50% 50% 0 50%;
+            top: -10px;
+        }
+
+        .ribbon::before {
+            left: -15px;
+            transform: rotate(-25deg);
+        }
+
+        .ribbon::after {
+            right: -15px;
+            transform: rotate(65deg);
+        }
+
+        /* TYPOGRAPHY */
+
+        .eyebrow {
+            color: var(--blue);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: clamp(27px, 8vw, 36px);
+            line-height: 1.25;
+            font-weight: 700;
+            letter-spacing: -1.4px;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            color: var(--grey);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 34px;
+        }
+
+        /* BUTTONS */
+
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 17px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary {
+            background: var(--blue);
+            color: white;
+            box-shadow: 0 5px 15px rgba(36,87,214,0.15);
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.65;
+            cursor: wait;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--navy);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+            margin-top: 32px;
+        }
+
+        /* QUESTION ICON */
+
+        .question-mark {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: #EEF3FF;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        /* FORM */
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 23px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--border);
+            background: #FAFBFD;
+            border-radius: 9px;
+            font-size: 14px;
+            color: var(--navy);
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--blue);
+            background: white;
+        }
+
+        input::placeholder {
+            color: #A5ADBA;
+        }
+
+        /* SUCCESS */
+
+        .success-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #EEF3FF;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            margin: 0 auto 28px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            color: #AAB1BD;
+            letter-spacing: 1px;
+        }
+
+        .error {
+            color: #D14343;
+            font-size: 12px;
+            margin-top: 12px;
+            display: none;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 360px) {
+            .content {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .envelope {
+                transform: scale(0.9);
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-height: 650px) {
+            .container {
+                padding-top: 15px;
+                padding-bottom: 45px;
+            }
+
+            .envelope {
+                margin-bottom: 22px;
+                transform: scale(0.85);
+            }
+
+            .subtitle {
+                margin-bottom: 20px;
+            }
+
+            .button-group {
+                margin-top: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <main class="content">
+
+        <!-- SCREEN 1: COVER -->
+
+        <section class="screen active" id="cover">
+
+            <div class="envelope">
+                <div class="ribbon"></div>
+            </div>
+
+            <p class="eyebrow">A little invitation</p>
+
+            <h1>Something for you.</h1>
+
+            <p class="subtitle">
+                There's a small question I'd like to ask.
+            </p>
+
+            <button class="btn btn-primary" onclick="showScreen('question')">
+                Open →
+            </button>
+
+        </section>
+
+
+        <!-- SCREEN 2: QUESTION -->
+
+        <section class="screen" id="question">
+
+            <div class="question-mark">?</div>
+
+            <p class="eyebrow">One quick question</p>
+
+            <h1>Hey, do you want to hang out with me?</h1>
+
+            <p class="subtitle">
+                Nothing complicated. Just a little time together.
+            </p>
+
+            <div class="button-group">
+
+                <button class="btn btn-primary" onclick="showScreen('yesForm')">
+                    Yes, let's go!
+                </button>
+
+                <button class="btn btn-secondary" onclick="showScreen('no')">
+                    No, maybe another time
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- SCREEN 3: NO -->
+
+        <section class="screen" id="no">
+
+            <div class="question-mark">:/</div>
+
+            <p class="eyebrow">Well, okay then</p>
+
+            <h1>Aw, that's a shame!</h1>
+
+            <p class="subtitle">
+                Maybe next time. No worries!
+            </p>
+
+            <button class="btn btn-secondary" onclick="showScreen('question')">
+                Go back
+            </button>
+
+        </section>
+
+
+        <!-- SCREEN 4: YES FORM -->
+
+        <section class="screen" id="yesForm">
+
+            <p class="eyebrow">Sounds like a plan</p>
+
+            <h1>Let's figure out the details.</h1>
+
+            <p class="subtitle">
+                Your turn to pick the place and time.
+            </p>
+
+            <form id="invitationForm">
+
+                <div class="form-group">
+
+                    <label for="place">Where should we go?</label>
+
+                    <input
+                        type="text"
+                        id="place"
+                        name="place"
+                        placeholder="e.g. A coffee shop, park..."
+                        maxlength="200"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="datetime">When works for you?</label>
+
+                    <input
+                        type="datetime-local"
+                        id="datetime"
+                        name="datetime"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="sendBtn">
+                    Send →
+                </button>
+
+                <p class="error" id="errorMessage" role="alert"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- SCREEN 5: SUCCESS -->
+
+        <section class="screen" id="success">
+
+            <div class="success-icon">✓</div>
+
+            <p class="eyebrow">Invitation confirmed</p>
+
+            <h1>Got it!</h1>
+
+            <p class="subtitle">
+                Looking forward to it. See you soon!
+            </p>
+
+        </section>
+
+    </main>
+
+    <div class="footer">
+        MADE WITH A LITTLE EFFORT
+    </div>
+
+</div>
+
+
+<script>
+
+    // ==========================================
+    // FORMSPREE EMAIL CONFIGURATION
+    // ==========================================
+
+    const FORMSPREE_URL = "https://formspree.io/f/myewngrw";
+
+
+    // ==========================================
+    // SCREEN NAVIGATION
+    // ==========================================
+
+    function showScreen(screenId) {
+
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.classList.remove('active');
+        });
+
+        document.getElementById(screenId).classList.add('active');
+
+    }
+
+
+    // ==========================================
+    // DATE AND TIME VALIDATION
+    // ==========================================
+
+    const dateInput = document.getElementById('datetime');
+
+    function getLocalDateTime() {
+
+        const now = new Date();
+
+        now.setMinutes(
+            now.getMinutes() - now.getTimezoneOffset()
+        );
+
+        return now.toISOString().slice(0, 16);
+
+    }
+
+    dateInput.min = getLocalDateTime();
+
+
+    // ==========================================
+    // EMAIL NOTIFICATION
+    // ==========================================
+
+    const form = document.getElementById('invitationForm');
+
+    const sendBtn = document.getElementById('sendBtn');
+
+    const errorMessage = document.getElementById('errorMessage');
+
+
+    form.addEventListener('submit', async function(event) {
+
+        event.preventDefault();
+
+        errorMessage.style.display = 'none';
+
+        if (!form.reportValidity()) {
+            return;
+        }
+
+        if (new Date(dateInput.value) <= new Date()) {
+
+            errorMessage.textContent =
+                'Please choose a future date and time.';
+
+            errorMessage.style.display = 'block';
+
+            return;
+        }
+
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Sending...';
+
+        const formData = new FormData(form);
+
+        formData.append(
+            '_subject',
+            'New invitation response!'
+        );
+
+        try {
+
+            const response = await fetch(FORMSPREE_URL, {
+
+                method: 'POST',
+
+                body: formData,
+
+                headers: {
+                    'Accept': 'application/json'
+                }
+
+            });
+
+            if (!response.ok) {
+                throw new Error('Submission failed');
+            }
+
+            showScreen('success');
+
+            form.reset();
+
+        } catch (error) {
+
+            errorMessage.textContent =
+                'Something went wrong. Please try again.';
+
+            errorMessage.style.display = 'block';
+
+            sendBtn.disabled = false;
+            sendBtn.textContent = 'Send →';
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
